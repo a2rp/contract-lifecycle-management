@@ -11,7 +11,7 @@ const links = [
   { to: "/playbooks", label: "Playbooks" },
 ];
 
-function Header({ onCreate, currentTitle }) {
+const Header = ({ onCreate, currentTitle }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const lastScroll = useRef(0);
