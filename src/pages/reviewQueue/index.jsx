@@ -5,7 +5,7 @@ import styles from "./styles.module.css";
 
 const money = (value) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(value || 0);
 
-function ReviewQueuePage({ contracts, reviewContract, updateContract, notify }) {
+const ReviewQueuePage = ({ contracts, reviewContract, updateContract, notify }) => {
   const [filter, setFilter] = useState("Needs attention");
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState("");
