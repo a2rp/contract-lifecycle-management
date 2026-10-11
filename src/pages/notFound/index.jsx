@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { FiArrowLeft, FiFileText } from "react-icons/fi";
 import styles from "./styles.module.css";
 
-function NotFoundPage() {
+const NotFoundPage = () => {
   return (
     <main className={styles.page}>
       <div className={styles.document}><FiFileText /><span>404</span><i /></div>
