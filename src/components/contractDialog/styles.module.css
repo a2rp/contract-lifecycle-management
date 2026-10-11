@@ -1,0 +1,52 @@
+.backdrop { position: fixed; z-index: 80; inset: 0; display: grid; overflow-y: auto; place-items: center; padding: 24px; background: rgb(20 29 25 / 58%); backdrop-filter: blur(5px); }
+.dialog { width: min(680px, 100%); max-height: min(90vh, 900px); overflow-y: auto; border: 1px solid #e6e0d4; border-radius: 15px; background: #fffefa; box-shadow: 0 26px 80px rgb(12 22 17 / 30%); animation: open 170ms ease-out; }
+.dialogHeader { position: sticky; z-index: 1; top: 0; display: flex; align-items: flex-start; gap: 14px; padding: 20px 23px 18px; border-bottom: 1px solid #e8e5dc; background: #fffefa; }
+.dialogIcon { display: grid; width: 40px; height: 40px; flex: 0 0 auto; place-items: center; border-radius: 10px; color: #315241; background: #e6ebdf; }
+.dialogIcon svg { width: 19px; height: 19px; }
+.dialogHeader h2 { margin: 3px 0 4px; font-family: "Newsreader", Georgia, serif; font-size: 25px; font-weight: 600; letter-spacing: -.025em; }
+.dialogHeader p { margin: 0; color: #737d76; font-size: 13px; line-height: 1.45; }
+.eyebrow { color: #9e693b; font-size: 10px; font-weight: 750; letter-spacing: .12em; }
+.closeButton { display: grid; width: 36px; height: 36px; flex: 0 0 auto; place-items: center; margin-left: auto; border: 1px solid #e2e0d8; border-radius: 8px; color: #68736c; background: #fffefa; transition: border-color 140ms ease, box-shadow 140ms ease; }
+.closeButton:hover { border-color: #d2ad80; box-shadow: 0 3px 10px rgb(36 58 50 / 10%); }
+.closeButton svg { width: 17px; height: 17px; }
+.form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 16px; padding: 20px 23px 22px; }
+.field, .fullField { display: grid; min-width: 0; gap: 7px; color: #48554d; font-size: 12px; font-weight: 650; }
+.fullField { grid-column: 1 / -1; }
+.field input, .field select, .fullField input:not([type="file"]), .fullField textarea { width: 100%; min-height: 43px; padding: 10px 12px; border: 1px solid #dcdcd3; border-radius: 7px; color: #28342d; background: #fff; font-size: 14px; font-weight: 450; }
+.fullField textarea { min-height: 94px; resize: vertical; line-height: 1.5; }
+.field input:focus, .field select:focus, .fullField input:focus, .fullField textarea:focus { border-color: #789079; outline: 3px solid rgb(73 101 86 / 12%); }
+.uploadLabel { display: flex; min-height: 48px; align-items: center; gap: 9px; padding: 0 12px; border: 1px dashed #b7b9ae; border-radius: 8px; color: #354f42; background: #f7f7f1; cursor: pointer; }
+.uploadLabel svg { width: 18px; height: 18px; }
+.uploadLabel span { margin-left: auto; color: #7b847d; font-size: 11px; font-weight: 500; }
+.fileInput { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; clip-path: inset(50%); }
+.fileInput:focus-visible + small { outline: 3px solid rgb(184 120 62 / 38%); }
+.fullField small { color: #737d76; font-size: 12px; font-weight: 400; line-height: 1.45; }
+.error { grid-column: 1 / -1; margin: 0; padding: 10px 12px; border-radius: 7px; color: #8e4035; background: #f7e9e5; font-size: 13px; line-height: 1.45; }
+.actions { grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: 9px; margin-top: 5px; padding-top: 15px; border-top: 1px solid #ebe8df; }
+.cancelButton, .saveButton { min-height: 42px; padding: 0 16px; border: 1px solid #d9dbd2; border-radius: 7px; font-size: 13px; font-weight: 650; transition: border-color 150ms ease, box-shadow 150ms ease, background 150ms ease; }
+.cancelButton { color: #536057; background: #fffefa; }
+.saveButton { border-color: #315241; color: #fff; background: #315241; }
+.cancelButton:hover { border-color: #b69a78; box-shadow: 0 3px 9px rgb(24 43 33 / 8%); }
+.saveButton:hover { border-color: #243a32; background: #243a32; box-shadow: 0 5px 13px rgb(36 58 50 / 18%); }
+@keyframes open { from { opacity: 0; transform: scale(.985); } to { opacity: 1; transform: scale(1); } }
+
+.backdrop {
+  @media (max-width: 560px) { align-items: end; padding: 0; }
+  .dialog {
+    @media (max-width: 560px) { width: 100%; max-height: 92vh; border-radius: 16px 16px 0 0; }
+  }
+  .dialogHeader {
+    @media (max-width: 560px) { padding: 17px 16px 15px; gap: 10px; }
+  }
+  .dialogHeader h2 {
+    @media (max-width: 560px) { font-size: 23px; }
+  }
+  .form {
+    @media (max-width: 560px) { grid-template-columns: 1fr; padding: 16px; }
+  }
+  .field, .fullField, .error, .actions {
+    @media (max-width: 560px) { grid-column: 1; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) { .dialog { animation: none; } }
