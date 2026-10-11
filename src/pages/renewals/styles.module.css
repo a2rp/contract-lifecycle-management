@@ -1,0 +1,87 @@
+.page { width: min(1320px, calc(100% - 48px)); margin: 0 auto; padding: 35px 0 62px; }
+.heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 20px; }
+.eyebrow, .sectionLabel { color: #936b43; font-size: 10px; font-weight: 750; letter-spacing: .14em; }
+.heading h1 { margin: 5px 0 4px; color: #243a32; font-family: "Newsreader", Georgia, serif; font-size: 40px; font-weight: 600; letter-spacing: -.035em; }
+.heading p { margin: 0; color: #737d76; font-size: 14px; }
+.periodControl { display: flex; min-height: 42px; align-items: center; gap: 8px; padding: 0 11px; border: 1px solid #dddcd2; border-radius: 7px; color: #66746a; background: #fffefa; font-size: 11px; }
+.periodControl > svg { width: 16px; height: 16px; color: #60755f; }
+.periodControl select { max-width: 132px; border: 0; color: #3f5347; background: transparent; font-size: 11px; font-weight: 650; }
+.summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 11px; margin-bottom: 15px; }
+.summary article { display: grid; min-height: 108px; grid-template-columns: 38px 1fr; grid-template-rows: 1fr auto; align-items: center; column-gap: 10px; padding: 15px; border: 1px solid #e0ddd4; border-radius: 8px; background: #fffefa; }
+.summaryIcon { display: grid; width: 37px; height: 37px; grid-row: 1; place-items: center; border-radius: 10px; color: #496556; background: #eaf0e7; }
+.summaryIcon[data-tone="copper"] { color: #a36c3e; background: #f5eadc; }
+.summaryIcon[data-tone="blue"] { color: #536c7a; background: #e9eef0; }
+.summaryIcon[data-tone="olive"] { color: #657c52; background: #edf0e3; }
+.summaryIcon svg { width: 17px; height: 17px; }
+.summary article > div { display: grid; gap: 2px; }
+.summary article > div > span { color: #758077; font-size: 11px; }
+.summary article > div > strong { color: #2f4939; font-family: "Newsreader", Georgia, serif; font-size: 25px; font-weight: 600; }
+.summary article > small { grid-column: 1 / -1; margin-top: 6px; color: #899088; font-size: 10px; line-height: 1.35; }
+.noticeCard { display: grid; grid-template-columns: 45px minmax(240px, 1fr) minmax(190px, 265px); align-items: center; gap: 14px; margin-bottom: 22px; padding: 17px 19px; border: 1px solid #dcd5c7; border-radius: 8px; background: #e9e6da; }
+.noticeMark { display: grid; width: 43px; height: 43px; place-items: center; border-radius: 11px; color: #fffaf0; background: #496556; }
+.noticeMark svg { width: 19px; height: 19px; }
+.noticeCard h2 { margin: 3px 0 4px; color: #2b4034; font-family: "Newsreader", Georgia, serif; font-size: 21px; font-weight: 600; }
+.noticeCard p { max-width: 610px; margin: 0; color: #6d786e; font-size: 11px; line-height: 1.5; }
+.noticeScale { display: grid; gap: 7px; padding: 0 3px; color: #8b795e; font-size: 8px; font-weight: 750; letter-spacing: .1em; }
+.noticeScale div { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+.noticeScale i { height: 6px; border-radius: 99px; background: #c8d0bc; }
+.noticeScale i:nth-child(2) { background: #abb99f; }
+.noticeScale i:nth-child(3) { background: #899f88; }
+.noticeScale i:nth-child(4) { background: #ba9870; }
+.noticeScale i:nth-child(5) { background: #a66f43; }
+.noticeScale span:last-child { justify-self: end; }
+.timelineToolbar { display: flex; align-items: end; justify-content: space-between; gap: 14px; margin-bottom: 10px; }
+.timelineToolbar > div { display: flex; align-items: center; gap: 11px; }
+.timelineToolbar > div strong { color: #758077; font-size: 11px; font-weight: 550; }
+.search { display: flex; width: min(330px, 48%); min-height: 38px; align-items: center; gap: 8px; padding: 0 10px; border: 1px solid #dddcd2; border-radius: 6px; color: #8a948c; background: #fffefa; }
+.search svg { width: 15px; height: 15px; flex: 0 0 auto; }
+.search input { width: 100%; min-width: 0; border: 0; outline: 0; color: #314238; background: transparent; font-size: 12px; }
+.search input::placeholder { color: #999f97; }
+.srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; clip-path: inset(50%); }
+.monthList { display: grid; gap: 17px; }
+.monthGroup { display: grid; gap: 8px; }
+.monthLabel { display: flex; align-items: center; gap: 10px; color: #394f41; font-family: "Newsreader", Georgia, serif; font-size: 18px; font-weight: 600; }
+.monthLabel i { width: 5px; height: 5px; border-radius: 50%; background: #c08b55; }
+.monthLabel small { color: #8a9288; font-family: "DM Sans", sans-serif; font-size: 10px; font-weight: 550; }
+.renewalCard { display: grid; grid-template-columns: 48px minmax(0, 1fr) 155px; align-items: center; gap: 14px; padding: 14px; border: 1px solid #dfddd4; border-radius: 8px; background: #fffefa; box-shadow: 0 3px 12px rgb(36 58 50 / 3%); transition: border-color 150ms ease, box-shadow 150ms ease; }
+.renewalCard:hover { border-color: #c9b99c; box-shadow: 0 7px 18px rgb(36 58 50 / 7%); }
+.dayTile { display: grid; width: 46px; height: 51px; align-content: center; justify-items: center; border: 1px solid #e3dfd3; border-radius: 7px; color: #345243; background: #f6f4eb; }
+.dayTile strong { font-family: "Newsreader", Georgia, serif; font-size: 22px; line-height: 1; }
+.dayTile span { margin-top: 3px; color: #a16f45; font-size: 9px; font-weight: 750; text-transform: uppercase; }
+.cardMain { min-width: 0; }
+.cardTitle { display: flex; align-items: center; gap: 8px; }
+.typeLabel { overflow: hidden; color: #8a7355; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.state { padding: 4px 7px; border-radius: 5px; color: #8b6437; background: #f4ecdd; font-size: 9px; font-weight: 700; white-space: nowrap; }
+.state[data-state="Renewal in progress"] { color: #496650; background: #e8efe5; }
+.state[data-state="Not renewing"] { color: #8e5148; background: #f7e8e3; }
+.cardMain h3 { overflow: hidden; margin: 6px 0 2px; color: #2e4035; font-family: "Newsreader", Georgia, serif; font-size: 19px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.cardMain > p { margin: 0; color: #758077; font-size: 11px; }
+.cardMain > p i { padding-inline: 3px; color: #bba988; font-style: normal; }
+.cardMeta { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 9px; color: #8a9289; font-size: 10px; }
+.cardMeta span { display: inline-flex; align-items: center; gap: 4px; }
+.cardMeta svg { width: 12px; height: 12px; color: #72836e; }
+.cardMeta strong { color: #526257; font-weight: 650; }
+.cardActions { display: grid; justify-items: stretch; gap: 5px; }
+.startButton, .progressButton { display: inline-flex; min-height: 34px; align-items: center; justify-content: center; gap: 5px; padding: 0 8px; border: 1px solid #315241; border-radius: 6px; color: #fff; background: #315241; font-size: 10px; font-weight: 650; white-space: nowrap; transition: border-color 140ms ease, box-shadow 140ms ease, background 140ms ease; }
+.startButton:hover { border-color: #243a32; background: #243a32; box-shadow: 0 4px 9px rgb(36 58 50 / 15%); }
+.startButton svg, .progressButton svg { width: 13px; height: 13px; }
+.progressButton { border-color: #cbd7c7; color: #496650; background: #edf2e9; cursor: default; }
+.closeButton { min-height: 28px; border: 1px solid transparent; border-radius: 5px; color: #818980; background: transparent; font-size: 10px; }
+.closeButton:hover { border-color: #d6d2c5; color: #805936; box-shadow: 0 3px 8px rgb(36 58 50 / 6%); }
+.recordLink { display: inline-flex; min-height: 25px; align-items: center; justify-content: center; gap: 4px; color: #57705e; font-size: 10px; font-weight: 650; }
+.recordLink:hover { color: #a36c3e; }
+.recordLink svg { width: 12px; height: 12px; }
+.closedState { display: inline-flex; align-items: center; justify-content: center; gap: 5px; color: #8b564d; font-size: 10px; font-weight: 650; }
+.closedState svg { width: 13px; height: 13px; }
+.empty { display: grid; min-height: 240px; align-content: center; justify-items: center; gap: 8px; border: 1px solid #e0ddd4; border-radius: 8px; color: #7b857c; background: #fffefa; text-align: center; }
+.empty svg { width: 25px; height: 25px; color: #7c8d79; }
+.empty strong { color: #405246; font-size: 14px; }
+.empty span { font-size: 12px; }
+.empty a { display: inline-flex; align-items: center; gap: 5px; margin-top: 3px; color: #496556; font-size: 12px; font-weight: 650; }
+.empty a svg { width: 14px; height: 14px; }
+
+.page {
+  @media (max-width: 920px) { .summary { grid-template-columns: repeat(2, 1fr); } .renewalCard { grid-template-columns: 48px minmax(0, 1fr) 140px; } .noticeCard { grid-template-columns: 43px 1fr; } .noticeScale { grid-column: 2; grid-row: 2; width: 220px; } }
+  @media (max-width: 680px) { width: calc(100% - 32px); padding-top: 28px; .heading { align-items: flex-start; flex-direction: column; } .heading h1 { font-size: 36px; } .periodControl { width: fit-content; } .noticeCard { grid-template-columns: 38px minmax(0, 1fr); padding: 14px; gap: 10px; } .noticeMark { width: 36px; height: 36px; } .noticeCard h2 { font-size: 19px; } .noticeScale { width: 100%; } .renewalCard { grid-template-columns: 43px minmax(0, 1fr); gap: 10px; padding: 11px; } .dayTile { width: 42px; height: 48px; } .cardActions { grid-column: 2; grid-template-columns: repeat(2, 1fr); align-items: center; gap: 4px; } .recordLink { grid-column: 1 / -1; justify-self: start; min-height: 27px; } .cardMeta { gap: 6px 10px; } }
+  @media (max-width: 430px) { width: calc(100% - 24px); .summary article { grid-template-columns: 31px 1fr; padding: 11px; column-gap: 7px; } .summaryIcon { width: 30px; height: 30px; } .summary article > div > span { font-size: 10px; } .summary article > div > strong { font-size: 23px; } .summary article > small { font-size: 9px; } .timelineToolbar { align-items: flex-start; flex-direction: column; } .timelineToolbar > div { flex-wrap: wrap; } .search { width: 100%; } .cardTitle { flex-wrap: wrap; gap: 4px 7px; } .cardMain h3 { font-size: 17px; } .cardMeta span { font-size: 9px; } }
+}
