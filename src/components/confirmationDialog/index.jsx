@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { FiAlertTriangle, FiArchive, FiTrash2, FiX } from "react-icons/fi";
 import styles from "./styles.module.css";
 
-function ConfirmationDialog({ dialog, onCancel, onConfirm }) {
+const ConfirmationDialog = ({ dialog, onCancel, onConfirm }) => {
   const dialogRef = useRef(null);
   const contract = dialog.contract;
   const playbook = dialog.playbook;
