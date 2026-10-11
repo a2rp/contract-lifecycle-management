@@ -9,7 +9,7 @@ const RenewalsPage = lazy(() => import("./pages/renewals/index.jsx"));
 const PlaybooksPage = lazy(() => import("./pages/playbooks/index.jsx"));
 const NotFoundPage = lazy(() => import("./pages/notFound/index.jsx"));
 
-function AppRoutes({ pageProps }) {
+const AppRoutes = ({ pageProps }) => {
   const location = useLocation();
   return (
     <Suspense fallback={<Loading />} key={location.pathname}>
