@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap");
+
+:root {
+  font-family: "DM Sans", sans-serif;
+  color: #202a26;
+  background: #f3f0e8;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --ink: #202a26;
+  --muted: #737d76;
+  --line: #dfded6;
+  --paper: #fffefa;
+  --cream: #f3f0e8;
+  --forest: #243a32;
+  --forest-light: #496556;
+  --copper: #b8783e;
+  --olive: #d7e0c9;
+  --shadow: 0 16px 42px rgb(36 58 50 / 9%);
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { min-width: 320px; scroll-behavior: smooth; }
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body, button, input, select, textarea { font-family: "DM Sans", sans-serif; }
+button, input, select, textarea { font-size: 14px; }
+button { color: inherit; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid rgb(184 120 62 / 38%); outline-offset: 2px; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; }
+img { display: block; max-width: 100%; }
+::selection { color: #fff; background: #496556; }
+
+.os-theme-pactline {
+  --os-size: 9px;
+  --os-padding-perpendicular: 2px;
+  --os-padding-axis: 2px;
+  --os-track-border-radius: 999px;
+  --os-handle-border-radius: 999px;
+  --os-handle-bg: rgb(73 101 86 / 30%);
+  --os-handle-bg-hover: rgb(73 101 86 / 58%);
+  --os-handle-bg-active: rgb(36 58 50 / 80%);
+}

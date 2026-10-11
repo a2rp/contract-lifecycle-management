@@ -1,0 +1,8 @@
+.app { min-height: 100vh; color: var(--ink); }
+.skipLink { position: fixed; z-index: 50; top: 10px; left: 10px; padding: 12px 16px; border-radius: 8px; color: #fff; background: var(--forest); transform: translateY(-150%); }
+.skipLink:focus { transform: translateY(0); }
+.main { min-height: calc(100vh - 230px); padding-top: 100px; }
+
+.main {
+  @media (max-width: 700px) { padding-top: 88px; }
+}
