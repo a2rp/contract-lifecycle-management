@@ -7,7 +7,7 @@ const money = (value) => new Intl.NumberFormat("en-US", { style: "currency", cur
 const dateLabel = (value) => new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" }).format(new Date(`${value}T00:00:00`));
 const daysUntil = (value) => Math.ceil((new Date(`${value}T00:00:00`).getTime() - new Date().setHours(0, 0, 0, 0)) / 86400000);
 
-function RenewalsPage({ contracts, updateContract, markNotRenewing, notify }) {
+const RenewalsPage = ({ contracts, updateContract, markNotRenewing, notify }) => {
   const [windowDays, setWindowDays] = useState(180);
   const [query, setQuery] = useState("");
   const renewalContracts = useMemo(() => contracts.filter((item) => item.status !== "Archived" && item.renewalDate && daysUntil(item.renewalDate) >= -14 && daysUntil(item.renewalDate) <= windowDays).sort((a, b) => a.renewalDate.localeCompare(b.renewalDate)), [contracts, windowDays]);
