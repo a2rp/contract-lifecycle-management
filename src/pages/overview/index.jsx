@@ -6,7 +6,7 @@ const money = (value) => new Intl.NumberFormat("en-US", { style: "currency", cur
 const dateLabel = (value) => new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" }).format(new Date(`${value}T00:00:00`));
 const daysUntil = (value) => Math.ceil((new Date(`${value}T00:00:00`).getTime() - new Date().setHours(0, 0, 0, 0)) / 86400000);
 
-function OverviewPage({ contracts, createContract }) {
+const OverviewPage = ({ contracts, createContract }) => {
   const today = new Intl.DateTimeFormat("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" }).format(new Date()).toUpperCase();
   const active = contracts.filter((item) => item.status !== "Archived");
   const inReview = active.filter((item) => ["In review", "Needs changes"].includes(item.status));
