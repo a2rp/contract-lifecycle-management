@@ -7,7 +7,7 @@ const statuses = ["All agreements", "In review", "Needs changes", "Awaiting sign
 const money = (value) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(value || 0);
 const dateLabel = (value) => value ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(new Date(`${value}T00:00:00`)) : "Not set";
 
-function AgreementsPage({ contracts, createContract, editContract, deleteContract, archiveContract, updateContract, notify }) {
+const AgreementsPage = ({ contracts, createContract, editContract, deleteContract, archiveContract, updateContract, notify }) => {
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState("All agreements");
   const [sort, setSort] = useState("recent");
