@@ -7,6 +7,7 @@ const dateLabel = (value) => new Intl.DateTimeFormat("en-US", { month: "short", 
 const daysUntil = (value) => Math.ceil((new Date(`${value}T00:00:00`).getTime() - new Date().setHours(0, 0, 0, 0)) / 86400000);
 
 function OverviewPage({ contracts, createContract }) {
+  const today = new Intl.DateTimeFormat("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" }).format(new Date()).toUpperCase();
   const active = contracts.filter((item) => item.status !== "Archived");
   const inReview = active.filter((item) => ["In review", "Needs changes"].includes(item.status));
   const renewalWindow = active.filter((item) => item.renewalDate && daysUntil(item.renewalDate) >= 0 && daysUntil(item.renewalDate) <= 90).sort((a, b) => a.renewalDate.localeCompare(b.renewalDate));
@@ -17,7 +18,7 @@ function OverviewPage({ contracts, createContract }) {
     <div className={styles.page}>
       <section className={styles.welcome}>
         <div>
-          <span className={styles.overline}>MONDAY, OCTOBER 12, 2026 <span>·</span> NORTHSTAR STUDIO</span>
+          <span className={styles.overline}>{today} <span>·</span> NORTHSTAR STUDIO</span>
           <h1>Keep every agreement<br /><em>moving forward.</em></h1>
           <p>A clear view of decisions, obligations, and the dates that deserve your attention.</p>
           <div className={styles.welcomeActions}>
