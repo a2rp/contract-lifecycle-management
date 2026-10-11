@@ -8,7 +8,7 @@ const blankContract = {
   clause: "", documentName: "",
 };
 
-function ContractDialog({ mode, contract, playbook, formType = "contract", onClose, onSave }) {
+const ContractDialog = ({ mode, contract, playbook, formType = "contract", onClose, onSave }) => {
   const source = formType === "playbook" ? playbook : contract;
   const [values, setValues] = useState({ ...blankContract, ...(source || {}) });
   const [error, setError] = useState("");
