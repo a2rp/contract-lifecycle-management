@@ -110,6 +110,7 @@ function App() {
   return (
     <div className={styles.app}>
       <a className={styles.skipLink} href="#main-content">Skip to content</a>
+      <ScrollToTop />
       <Header onCreate={() => pageProps.createContract()} currentTitle={sectionTitle} />
       <main className={styles.main} id="main-content">
         <AppRoutes pageProps={pageProps} />
