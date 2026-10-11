@@ -16,7 +16,7 @@ const links = [
   { label: "Patreon", detail: "patreon.com/ashishranjan", icon: <FaPatreon />, href: "https://www.patreon.com/ashishranjan" },
 ];
 
-function Footer() {
+const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
