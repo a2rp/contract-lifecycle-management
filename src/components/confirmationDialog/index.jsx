@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { FiAlertTriangle, FiArchive, FiTrash2, FiX } from "react-icons/fi";
 import styles from "./styles.module.css";
 
 function ConfirmationDialog({ dialog, onCancel, onConfirm }) {
+  const dialogRef = useRef(null);
   const contract = dialog.contract;
   const playbook = dialog.playbook;
   const config = {
@@ -14,15 +15,26 @@ function ConfirmationDialog({ dialog, onCancel, onConfirm }) {
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
+    const previousFocus = document.activeElement;
     document.body.style.overflow = "hidden";
-    const onKeyDown = (event) => { if (event.key === "Escape") onCancel(); };
+    const frame = window.requestAnimationFrame(() => dialogRef.current?.querySelector("button")?.focus());
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") onCancel();
+      if (event.key !== "Tab" || !dialogRef.current) return;
+      const controls = [...dialogRef.current.querySelectorAll("button:not([disabled]), a[href]")].filter((element) => element.getClientRects().length);
+      if (!controls.length) return;
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
     document.addEventListener("keydown", onKeyDown);
-    return () => { document.body.style.overflow = previousOverflow; document.removeEventListener("keydown", onKeyDown); };
+    return () => { window.cancelAnimationFrame(frame); document.body.style.overflow = previousOverflow; document.removeEventListener("keydown", onKeyDown); if (previousFocus instanceof HTMLElement) previousFocus.focus(); };
   }, [onCancel]);
 
   return (
     <div className={styles.backdrop} onMouseDown={(event) => { if (event.target === event.currentTarget) onCancel(); }}>
-      <section aria-labelledby="confirm-title" aria-modal="true" className={styles.dialog} role="alertdialog">
+      <section aria-labelledby="confirm-title" aria-modal="true" className={styles.dialog} ref={dialogRef} role="alertdialog">
         <button aria-label="Close dialog" className={styles.close} onClick={onCancel} type="button"><FiX /></button>
         <div className={styles.icon} data-danger={dialog.kind.includes("delete")}>
           {config.icon}
