@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { FiArrowUpRight, FiFileText, FiMenu, FiPlus, FiX } from "react-icons/fi";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styles from "./styles.module.css";
 
 const links = [
@@ -16,12 +16,6 @@ function Header({ onCreate, currentTitle }) {
   const [hidden, setHidden] = useState(false);
   const lastScroll = useRef(0);
   const headerRef = useRef(null);
-  const location = useLocation();
-
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [location.pathname]);
-
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
@@ -59,7 +53,7 @@ function Header({ onCreate, currentTitle }) {
         </button>
         <nav aria-label="Main navigation" className={menuOpen ? styles.navigationOpen : styles.navigation} id="primary-navigation">
           <div className={styles.navLinks}>
-            {links.map((link) => <NavLink className={({ isActive }) => isActive ? styles.activeLink : styles.link} end={link.end} key={link.to} to={link.to}>{link.label}</NavLink>)}
+            {links.map((link) => <NavLink className={({ isActive }) => isActive ? styles.activeLink : styles.link} end={link.end} key={link.to} onClick={() => setMenuOpen(false)} to={link.to}>{link.label}</NavLink>)}
           </div>
           <div className={styles.accountArea}>
             <span className={styles.userChip}><span>OC</span> Olivia Chen <FiArrowUpRight aria-hidden="true" /></span>
