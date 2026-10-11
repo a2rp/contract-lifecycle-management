@@ -1,0 +1,23 @@
+.backdrop { position: fixed; z-index: 90; inset: 0; display: grid; overflow-y: auto; place-items: center; padding: 20px; background: rgb(20 29 25 / 60%); backdrop-filter: blur(4px); }
+.dialog { position: relative; width: min(430px, 100%); padding: 28px; border: 1px solid #e7e1d6; border-radius: 14px; background: #fffefa; box-shadow: 0 24px 72px rgb(10 20 15 / 32%); text-align: center; }
+.close { position: absolute; top: 13px; right: 13px; display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid #e4e1d9; border-radius: 8px; color: #667269; background: #fffefa; }
+.close:hover { border-color: #c5b69f; box-shadow: 0 3px 9px rgb(0 0 0 / 8%); }
+.close svg { width: 16px; height: 16px; }
+.icon { display: grid; width: 52px; height: 52px; margin: 4px auto 14px; place-items: center; border-radius: 15px; color: #966335; background: #f5eadc; }
+.icon[data-danger="true"] { color: #9c4038; background: #f8e7e3; }
+.icon svg { width: 23px; height: 23px; }
+.eyebrow { color: #9e693b; font-size: 10px; font-weight: 750; letter-spacing: .13em; }
+.dialog h2 { margin: 8px 0; color: #25332b; font-family: "Newsreader", Georgia, serif; font-size: 25px; font-weight: 600; letter-spacing: -.025em; }
+.dialog p { margin: 0; color: #68736b; font-size: 14px; line-height: 1.55; }
+.actions { display: flex; justify-content: center; gap: 9px; margin-top: 24px; }
+.cancel, .confirm { min-height: 42px; padding: 0 15px; border: 1px solid #d9dbd2; border-radius: 7px; font-size: 13px; font-weight: 650; transition: border-color 150ms ease, box-shadow 150ms ease, background 150ms ease; }
+.cancel { color: #536057; background: #fffefa; }
+.cancel:hover { border-color: #b6a386; box-shadow: 0 4px 10px rgb(24 43 33 / 8%); }
+.confirm { border-color: #8d643d; color: #fff; background: #95683e; }
+.confirm[data-danger="true"] { border-color: #a44c42; background: #a44c42; }
+.confirm:hover { border-color: #74492c; background: #815532; box-shadow: 0 5px 13px rgb(36 58 50 / 16%); }
+.confirm[data-danger="true"]:hover { border-color: #84362f; background: #84362f; }
+
+.dialog {
+  @media (max-width: 460px) { padding: 24px 19px; }
+}
