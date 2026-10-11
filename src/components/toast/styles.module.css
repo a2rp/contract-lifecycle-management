@@ -1,0 +1,12 @@
+.toast { position: fixed; z-index: 100; right: 22px; bottom: 22px; display: flex; max-width: min(420px, calc(100vw - 32px)); min-height: 54px; align-items: center; gap: 11px; padding: 10px 12px 10px 15px; border: 1px solid #c6d4c5; border-radius: 10px; color: #243a32; background: #fffefa; box-shadow: 0 14px 34px rgb(28 47 38 / 18%); font-size: 14px; animation: arrive 200ms ease-out; }
+.toast[data-tone="error"] { border-color: #e7c6bd; color: #893d35; }
+.toast > svg { width: 18px; height: 18px; flex: 0 0 auto; color: #60845e; }
+.toast[data-tone="error"] > svg { color: #b34d40; }
+.toast button { display: grid; width: 32px; height: 32px; flex: 0 0 auto; place-items: center; border: 1px solid transparent; border-radius: 7px; color: inherit; background: transparent; transition: border-color 150ms ease, box-shadow 150ms ease; }
+.toast button:hover { border-color: #dfded6; box-shadow: 0 3px 10px rgb(0 0 0 / 8%); }
+.toast button svg { width: 16px; height: 16px; }
+@keyframes arrive { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.toast {
+  @media (max-width: 520px) { right: 12px; bottom: 12px; }
+}
