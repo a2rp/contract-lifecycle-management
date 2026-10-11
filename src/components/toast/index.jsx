@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { FiAlertCircle, FiCheckCircle, FiX } from "react-icons/fi";
 import styles from "./styles.module.css";
 
-function Toast({ toast, version, onClose }) {
+const Toast = ({ toast, version, onClose }) => {
   useEffect(() => {
     if (!toast) return undefined;
     const timer = window.setTimeout(onClose, 3800);
