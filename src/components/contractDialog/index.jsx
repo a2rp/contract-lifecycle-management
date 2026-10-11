@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiFilePlus, FiUploadCloud, FiX } from "react-icons/fi";
 import styles from "./styles.module.css";
 
@@ -13,15 +13,29 @@ function ContractDialog({ mode, contract, playbook, formType = "contract", onClo
   const [values, setValues] = useState({ ...blankContract, ...(source || {}) });
   const [error, setError] = useState("");
   const [fileName, setFileName] = useState(source?.documentName || "");
+  const dialogRef = useRef(null);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
+    const previousFocus = document.activeElement;
     document.body.style.overflow = "hidden";
-    const onKeyDown = (event) => { if (event.key === "Escape") onClose(); };
+    const frame = window.requestAnimationFrame(() => dialogRef.current?.querySelector("button, input:not([type='file']), select, textarea")?.focus());
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") onClose();
+      if (event.key !== "Tab" || !dialogRef.current) return;
+      const controls = [...dialogRef.current.querySelectorAll("button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href]")].filter((element) => element.getClientRects().length);
+      if (!controls.length) return;
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
     document.addEventListener("keydown", onKeyDown);
     return () => {
+      window.cancelAnimationFrame(frame);
       document.body.style.overflow = previousOverflow;
       document.removeEventListener("keydown", onKeyDown);
+      if (previousFocus instanceof HTMLElement) previousFocus.focus();
     };
   }, [onClose]);
 
@@ -61,7 +75,7 @@ function ContractDialog({ mode, contract, playbook, formType = "contract", onClo
 
   return (
     <div className={styles.backdrop} onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
-      <section aria-labelledby="contract-dialog-title" aria-modal="true" className={styles.dialog} role="dialog">
+      <section aria-labelledby="contract-dialog-title" aria-modal="true" className={styles.dialog} ref={dialogRef} role="dialog">
         <header className={styles.dialogHeader}>
           <div className={styles.dialogIcon}><FiFilePlus aria-hidden="true" /></div>
           <div><span className={styles.eyebrow}>{formType === "review" ? "REVIEW DECISION" : formType === "playbook" ? "CLAUSE LIBRARY" : "AGREEMENT DETAILS"}</span><h2 id="contract-dialog-title">{title}</h2><p>{intro}</p></div>
