@@ -1,10 +1,10 @@
-.footer { border-top: 1px solid #dddbd2; background: #ebe8dd; }
+﻿.footer { border-top: 1px solid #dddbd2; background: #ebe8dd; }
 .inner { display: flex; width: min(1320px, calc(100% - 48px)); min-height: 120px; margin: auto; align-items: center; justify-content: space-between; gap: 30px; }
 .identity { display: grid; gap: 8px; }
 .brand { display: inline-flex; width: fit-content; align-items: center; gap: 8px; color: #243a32; font-size: 17px; font-weight: 700; letter-spacing: -.05em; }
 .brand img { width: 25px; height: 25px; border-radius: 6px; object-fit: cover; }
 .brandDot { color: #a76b3a; }
-.identity p { color: #737d76; font-size: 12px; }
+.identity p { color: #737d76; font-size: 13px; }
 .identity p a { padding-inline: 4px; color: #354f42; text-decoration: none; }
 .identity p a:hover { color: #9e693b; }
 .links { display: flex; max-width: 720px; flex-wrap: wrap; justify-content: flex-end; gap: 8px 14px; }
@@ -13,8 +13,8 @@
 .links svg { width: 17px; height: 17px; }
 .tooltip { z-index: 50; border-radius: 9px; color: #fff; background: #17221d; box-shadow: 0 10px 25px rgb(14 22 18 / 28%); font-family: "DM Sans", sans-serif; }
 .tooltipContent { display: grid; width: max-content; min-width: 110px; margin: -8px -16px; padding: 8px 12px; gap: 2px; }
-.tooltipContent strong { color: #fff; font-size: 12px; font-weight: 650; line-height: 1.25; }
-.tooltipContent span { color: rgb(255 255 255 / 70%); font-size: 10px; line-height: 1.25; }
+.tooltipContent strong { color: #fff; font-size: 13px; font-weight: 650; line-height: 1.25; }
+.tooltipContent span { color: rgb(255 255 255 / 70%); font-size: 13px; line-height: 1.25; }
 .tooltipArrow { background: #17221d; }
 
 .inner {
