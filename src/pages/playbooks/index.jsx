@@ -16,7 +16,7 @@ function PlaybooksPage({ playbooks, createPlaybook, editPlaybook, deletePlaybook
   const categories = ["All playbooks", ...new Set(playbooks.map((item) => item.category))];
   const visible = useMemo(() => playbooks.filter((item) => (category === "All playbooks" || item.category === category) && `${item.name} ${item.category} ${item.description}`.toLowerCase().includes(query.trim().toLowerCase())), [playbooks, category, query]);
 
-  const usePlaybook = (item) => {
+  const applyPlaybook = (item) => {
     const type = item.name.toLowerCase().includes("nda") ? "Mutual NDA" : item.name.toLowerCase().includes("data") ? "Data processing" : item.name.toLowerCase().includes("subscription") ? "Software subscription" : "Professional services";
     createContract({ name: item.name, type, clause: item.description });
     notify(`${item.name} details added to a new draft.`);
@@ -41,7 +41,7 @@ function PlaybooksPage({ playbooks, createPlaybook, editPlaybook, deletePlaybook
           <div className={styles.cardTitle}><div><h2>{item.name}</h2><span>{item.id} <i /> Updated {item.updated}</span></div></div>
           <p className={styles.description}>{item.description}</p>
           <div className={styles.clauseCount}><FiShield /><strong>{item.clauses}</strong> guided clause sections <span>·</span><FiUsers /> Team standard</div>
-          <div className={styles.cardActions}><button className={styles.useButton} onClick={() => usePlaybook(item)} type="button"><FiCopy /> Use playbook</button><button aria-expanded={expanded === item.id} className={styles.previewButton} onClick={() => setExpanded(expanded === item.id ? "" : item.id)} type="button">{expanded === item.id ? "Hide terms" : "Preview terms"}</button></div>
+          <div className={styles.cardActions}><button className={styles.useButton} onClick={() => applyPlaybook(item)} type="button"><FiCopy /> Use playbook</button><button aria-expanded={expanded === item.id} className={styles.previewButton} onClick={() => setExpanded(expanded === item.id ? "" : item.id)} type="button">{expanded === item.id ? "Hide terms" : "Preview terms"}</button></div>
           {expanded === item.id && <div className={styles.preview}><span>STARTING CLAUSES</span><ul>{(clauseExamples[item.id] || ["Purpose and scope", "Responsibilities and notice", "Review checkpoints and exit terms"]).map((clause) => <li key={clause}>{clause}</li>)}</ul></div>}
         </article>)}
         {!visible.length && <div className={styles.empty}><FiBookOpen /><strong>No matching playbooks</strong><span>Change the category or search another term.</span><button onClick={() => { setCategory("All playbooks"); setQuery(""); }} type="button">Clear filters</button></div>}
