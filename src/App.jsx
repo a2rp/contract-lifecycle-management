@@ -26,7 +26,7 @@ const initialPlaybooks = [
   { id: "TPL-04", name: "Software subscription", category: "Technology", description: "Subscription term, usage, support, and renewal checkpoints.", clauses: 12, updated: "Sep 22" },
 ];
 
-function App() {
+const App = () => {
   const location = useLocation();
   const [contracts, setContracts] = useState(initialContracts);
   const [playbooks, setPlaybooks] = useState(initialPlaybooks);
