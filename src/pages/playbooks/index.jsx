@@ -9,7 +9,7 @@ const clauseExamples = {
   "TPL-04": ["Subscription scope and use rights", "Support commitments and service levels", "Renewal, suspension, and termination"],
 };
 
-function PlaybooksPage({ playbooks, createPlaybook, editPlaybook, deletePlaybook, createContract, notify }) {
+const PlaybooksPage = ({ playbooks, createPlaybook, editPlaybook, deletePlaybook, createContract, notify }) => {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All playbooks");
   const [expanded, setExpanded] = useState("");
