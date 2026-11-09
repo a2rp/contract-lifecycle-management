@@ -26,6 +26,14 @@ const initialPlaybooks = [
   { id: "TPL-04", name: "Software subscription", category: "Technology", description: "Subscription term, usage, support, and renewal checkpoints.", clauses: 12, updated: "Sep 22" },
 ];
 
+const nextPlaybookId = (playbooks) => {
+  const latest = playbooks.reduce((highest, playbook) => {
+    const match = /^TPL-(\d+)$/.exec(playbook.id);
+    return Math.max(highest, match ? Number(match[1]) : 0);
+  }, 0);
+  return `TPL-${String(latest + 1).padStart(2, "0")}`;
+};
+
 const App = () => {
   const location = useLocation();
   const [contracts, setContracts] = useState(initialContracts);
@@ -44,8 +52,10 @@ const App = () => {
       setContracts((items) => items.map((item) => item.id === dialog.contract.id ? { ...item, ...values, updated: "Just now" } : item));
       notify("Agreement details updated.");
     } else {
-      const sequence = Math.max(2400, ...contracts.map((item) => Number(item.id.slice(4)) || 0)) + 1;
-      setContracts((items) => [{ ...values, id: `AGR-${sequence}`, status: "Draft", updated: "Just now", notes: [], reviewer: "Mina Patel" }, ...items]);
+      setContracts((items) => {
+        const sequence = Math.max(2400, ...items.map((item) => Number(item.id.slice(4)) || 0)) + 1;
+        return [{ ...values, id: `AGR-${sequence}`, status: "Draft", updated: "Just now", notes: [], reviewer: "Mina Patel" }, ...items];
+      });
       notify("Agreement draft created.");
     }
     setDialog(null);
@@ -84,8 +94,7 @@ const App = () => {
       setPlaybooks((items) => items.map((item) => item.id === dialog.playbook.id ? { ...item, ...values, updated: "Just now" } : item));
       notify("Playbook updated.");
     } else {
-      const id = `TPL-${String(Date.now()).slice(-4)}`;
-      setPlaybooks((items) => [{ ...values, id, clauses: 6, updated: "Just now" }, ...items]);
+      setPlaybooks((items) => [{ ...values, id: nextPlaybookId(items), clauses: 6, updated: "Just now" }, ...items]);
       notify("Playbook created.");
     }
     setDialog(null);

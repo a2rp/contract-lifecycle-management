@@ -6,6 +6,11 @@ import styles from "./styles.module.css";
 const statuses = ["All agreements", "In review", "Needs changes", "Awaiting signature", "Active", "Draft", "Archived"];
 const money = (value) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(value || 0);
 const dateLabel = (value) => value ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(new Date(`${value}T00:00:00`)) : "Not set";
+const csvCell = (value) => {
+  const text = String(value ?? "");
+  const safeText = /^[\t\r\n ]*[=+\-@]/.test(text) ? `'${text}` : text;
+  return `"${safeText.replaceAll('"', '""')}"`;
+};
 
 const AgreementsPage = ({ contracts, createContract, editContract, deleteContract, archiveContract, updateContract, notify }) => {
   const [query, setQuery] = useState("");
@@ -24,7 +29,7 @@ const AgreementsPage = ({ contracts, createContract, editContract, deleteContrac
 
   const exportCsv = () => {
     const rows = [["ID", "Agreement", "Counterparty", "Type", "Status", "Owner", "Annual value", "Effective date", "End date", "Renewal notice"], ...filtered.map((item) => [item.id, item.name, item.counterparty, item.type, item.status, item.owner, item.value, item.startDate, item.endDate, item.renewalDate])];
-    const csv = rows.map((row) => row.map((value) => `"${String(value ?? "").replaceAll('"', '""')}"`).join(",")).join("\r\n");
+    const csv = rows.map((row) => row.map(csvCell).join(",")).join("\r\n");
     const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
     const link = document.createElement("a"); link.href = url; link.download = "pactline-agreements.csv"; link.click(); URL.revokeObjectURL(url);
     notify(`${filtered.length} agreement${filtered.length === 1 ? "" : "s"} exported to CSV.`);
@@ -41,8 +46,8 @@ const AgreementsPage = ({ contracts, createContract, editContract, deleteContrac
         <label className={styles.sortLabel}><span>Sort</span><select onChange={(event) => setSort(event.target.value)} value={sort}><option value="recent">Recently updated</option><option value="name">Name A-Z</option><option value="value">Highest value</option></select></label>
         <button className={styles.exportButton} onClick={exportCsv} type="button"><FiDownload /> Export CSV</button>
       </div>
-      <div aria-label="Filter agreements by status" className={styles.statusFilters} role="tablist">
-        {statuses.map((item) => <button aria-selected={status === item} className={status === item ? styles.activeFilter : styles.filter} key={item} onClick={() => setStatus(item)} role="tab" type="button">{item}<span>{item === "All agreements" ? contracts.length : contracts.filter((contract) => contract.status === item).length}</span></button>)}
+      <div aria-label="Filter agreements by status" className={styles.statusFilters} role="group">
+        {statuses.map((item) => <button aria-pressed={status === item} className={status === item ? styles.activeFilter : styles.filter} key={item} onClick={() => setStatus(item)} type="button">{item}<span>{item === "All agreements" ? contracts.length : contracts.filter((contract) => contract.status === item).length}</span></button>)}
       </div>
       <section aria-label="Agreements and details" className={styles.registerLayout}>
         <div className={styles.tablePanel}>

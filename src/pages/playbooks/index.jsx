@@ -32,7 +32,7 @@ const PlaybooksPage = ({ playbooks, createPlaybook, editPlaybook, deletePlaybook
         <div className={styles.bannerIcon}><FiBookOpen /></div><div><span className={styles.bannerLabel}>TEAM GUIDANCE</span><h2>Reusable starting points, built around your agreements.</h2><p>Templates here are working examples for this frontend workspace. Have counsel review any language before use.</p></div><div className={styles.bannerStats}><span><strong>{playbooks.length}</strong> playbooks</span><span><strong>{playbooks.reduce((sum, item) => sum + Number(item.clauses || 0), 0)}</strong> guided clauses</span></div>
       </section>
       <div className={styles.libraryToolbar}>
-        <div className={styles.categoryTabs} aria-label="Filter playbooks by category" role="tablist">{categories.map((item) => <button aria-selected={category === item} className={category === item ? styles.activeTab : styles.tab} key={item} onClick={() => setCategory(item)} role="tab" type="button">{item}</button>)}</div>
+        <div className={styles.categoryTabs} aria-label="Filter playbooks by category" role="group">{categories.map((item) => <button aria-pressed={category === item} className={category === item ? styles.activeTab : styles.tab} key={item} onClick={() => setCategory(item)} type="button">{item}</button>)}</div>
         <label className={styles.search}><FiSearch /><span className={styles.srOnly}>Search playbooks</span><input onChange={(event) => setQuery(event.target.value)} placeholder="Find a playbook" type="search" value={query} /></label>
       </div>
       <section aria-label="Contract playbooks" className={styles.cards}>

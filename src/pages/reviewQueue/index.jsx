@@ -34,8 +34,8 @@ const ReviewQueuePage = ({ contracts, reviewContract, updateContract, notify }) 
         <aside className={styles.queuePanel}>
           <div className={styles.queueHeader}><div><span className={styles.sectionLabel}>YOUR QUEUE</span><h2>Waiting on a decision</h2></div><span className={styles.countBubble}>{queue.length}</span></div>
           <label className={styles.search}><FiSearch aria-hidden="true" /><span className={styles.srOnly}>Search review queue</span><input onChange={(event) => setQuery(event.target.value)} placeholder="Search this queue" type="search" value={query} /></label>
-          <div aria-label="Filter review queue" className={styles.filters} role="tablist">
-            {["Needs attention", "In review", "Needs changes"].map((item) => <button aria-selected={filter === item} className={filter === item ? styles.activeFilter : styles.filter} key={item} onClick={() => setFilter(item)} role="tab" type="button">{item}</button>)}
+          <div aria-label="Filter review queue" className={styles.filters} role="group">
+            {["Needs attention", "In review", "Needs changes"].map((item) => <button aria-pressed={filter === item} className={filter === item ? styles.activeFilter : styles.filter} key={item} onClick={() => setFilter(item)} type="button">{item}</button>)}
           </div>
           <div className={styles.queueList}>
             {queue.map((item, index) => <button aria-pressed={selected?.id === item.id} className={selected?.id === item.id ? styles.selectedCard : styles.queueCard} key={item.id} onClick={() => setSelectedId(item.id)} type="button">

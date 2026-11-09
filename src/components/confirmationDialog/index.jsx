@@ -4,6 +4,7 @@ import styles from "./styles.module.css";
 
 const ConfirmationDialog = ({ dialog, onCancel, onConfirm }) => {
   const dialogRef = useRef(null);
+  const cancelRef = useRef(onCancel);
   const contract = dialog.contract;
   const playbook = dialog.playbook;
   const config = {
@@ -14,36 +15,46 @@ const ConfirmationDialog = ({ dialog, onCancel, onConfirm }) => {
   }[dialog.kind];
 
   useEffect(() => {
+    cancelRef.current = onCancel;
+  }, [onCancel]);
+
+  useEffect(() => {
     const previousOverflow = document.body.style.overflow;
     const previousFocus = document.activeElement;
     document.body.style.overflow = "hidden";
-    const frame = window.requestAnimationFrame(() => dialogRef.current?.querySelector("button")?.focus());
+    const frame = window.requestAnimationFrame(() => {
+      const safeAction = dialogRef.current?.querySelector("[data-dialog-safe]");
+      const firstButton = dialogRef.current?.querySelector("button:not([disabled])");
+      (safeAction || firstButton)?.focus();
+    });
     const onKeyDown = (event) => {
-      if (event.key === "Escape") onCancel();
+      if (event.key === "Escape") { event.preventDefault(); cancelRef.current(); return; }
       if (event.key !== "Tab" || !dialogRef.current) return;
       const controls = [...dialogRef.current.querySelectorAll("button:not([disabled]), a[href]")].filter((element) => element.getClientRects().length);
       if (!controls.length) return;
       const first = controls[0];
       const last = controls[controls.length - 1];
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      const activeIndex = controls.indexOf(document.activeElement);
+      if (activeIndex === -1) { event.preventDefault(); (event.shiftKey ? last : first).focus(); }
+      else if (event.shiftKey && activeIndex === 0) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && activeIndex === controls.length - 1) { event.preventDefault(); first.focus(); }
     };
     document.addEventListener("keydown", onKeyDown);
     return () => { window.cancelAnimationFrame(frame); document.body.style.overflow = previousOverflow; document.removeEventListener("keydown", onKeyDown); if (previousFocus instanceof HTMLElement) previousFocus.focus(); };
-  }, [onCancel]);
+  }, []);
 
   return (
     <div className={styles.backdrop} onMouseDown={(event) => { if (event.target === event.currentTarget) onCancel(); }}>
-      <section aria-labelledby="confirm-title" aria-modal="true" className={styles.dialog} ref={dialogRef} role="alertdialog">
+      <section aria-describedby="confirm-description" aria-labelledby="confirm-title" aria-modal="true" className={styles.dialog} ref={dialogRef} role="alertdialog">
         <button aria-label="Close dialog" className={styles.close} onClick={onCancel} type="button"><FiX /></button>
         <div className={styles.icon} data-danger={dialog.kind.includes("delete")}>
           {config.icon}
         </div>
         <span className={styles.eyebrow}>PLEASE CONFIRM</span>
         <h2 id="confirm-title">{config.title}</h2>
-        <p>{config.body}</p>
+        <p id="confirm-description">{config.body}</p>
         <div className={styles.actions}>
-          <button className={styles.cancel} onClick={onCancel} type="button">Keep it</button>
+          <button className={styles.cancel} data-dialog-safe="true" onClick={onCancel} type="button">Keep it</button>
           <button className={styles.confirm} data-danger={dialog.kind.includes("delete")} onClick={onConfirm} type="button">{config.action}</button>
         </div>
       </section>
