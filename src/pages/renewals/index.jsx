@@ -1,11 +1,12 @@
 import { useMemo, useState } from "react";
 import { FiArrowUpRight, FiBell, FiCalendar, FiCheck, FiClock, FiRefreshCw, FiSearch } from "react-icons/fi";
+import { calendarDaysUntil } from "../../dateUtils";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 
 const money = (value) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(value || 0);
 const dateLabel = (value) => new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" }).format(new Date(`${value}T00:00:00`));
-const daysUntil = (value) => Math.ceil((new Date(`${value}T00:00:00`).getTime() - new Date().setHours(0, 0, 0, 0)) / 86400000);
+const daysUntil = calendarDaysUntil;
 
 const RenewalsPage = ({ contracts, updateContract, markNotRenewing, notify }) => {
   const [windowDays, setWindowDays] = useState(180);

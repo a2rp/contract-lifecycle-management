@@ -25,13 +25,13 @@ const AgreementsPage = ({ contracts, createContract, editContract, deleteContrac
       return b.id.localeCompare(a.id);
     });
   }, [contracts, query, sort, status]);
-  const selected = filtered.find((item) => item.id === selectedId) || filtered[0] || contracts.find((item) => item.id === selectedId);
+  const selected = filtered.find((item) => item.id === selectedId) || filtered[0];
 
   const exportCsv = () => {
     const rows = [["ID", "Agreement", "Counterparty", "Type", "Status", "Owner", "Annual value", "Effective date", "End date", "Renewal notice"], ...filtered.map((item) => [item.id, item.name, item.counterparty, item.type, item.status, item.owner, item.value, item.startDate, item.endDate, item.renewalDate])];
     const csv = rows.map((row) => row.map(csvCell).join(",")).join("\r\n");
     const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
-    const link = document.createElement("a"); link.href = url; link.download = "pactline-agreements.csv"; link.click(); URL.revokeObjectURL(url);
+    const link = document.createElement("a"); link.href = url; link.download = "pactline-agreements.csv"; link.click(); window.setTimeout(() => URL.revokeObjectURL(url), 1000);
     notify(`${filtered.length} agreement${filtered.length === 1 ? "" : "s"} exported to CSV.`);
   };
 
@@ -43,7 +43,7 @@ const AgreementsPage = ({ contracts, createContract, editContract, deleteContrac
       </div>
       <div className={styles.filterTray}>
         <label className={styles.search}><FiSearch aria-hidden="true" /><span className={styles.srOnly}>Search agreements</span><input onChange={(event) => setQuery(event.target.value)} placeholder="Search name, company, owner..." type="search" value={query} />{query && <button aria-label="Clear search" onClick={() => setQuery("")} type="button"><FiX /></button>}</label>
-        <label className={styles.sortLabel}><span>Sort</span><select onChange={(event) => setSort(event.target.value)} value={sort}><option value="recent">Recently updated</option><option value="name">Name A-Z</option><option value="value">Highest value</option></select></label>
+        <label className={styles.sortLabel}><span>Sort</span><select onChange={(event) => setSort(event.target.value)} value={sort}><option value="recent">Newest added</option><option value="name">Name A-Z</option><option value="value">Highest value</option></select></label>
         <button className={styles.exportButton} onClick={exportCsv} type="button"><FiDownload /> Export CSV</button>
       </div>
       <div aria-label="Filter agreements by status" className={styles.statusFilters} role="group">

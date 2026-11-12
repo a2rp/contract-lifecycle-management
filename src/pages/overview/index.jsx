@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { FiArrowDownRight, FiArrowUpRight, FiClock, FiFileText, FiPlus, FiShield, FiUsers } from "react-icons/fi";
+import { calendarDaysUntil } from "../../dateUtils";
 import styles from "./styles.module.css";
 
 const money = (value) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(value || 0);
 const dateLabel = (value) => new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" }).format(new Date(`${value}T00:00:00`));
-const daysUntil = (value) => Math.ceil((new Date(`${value}T00:00:00`).getTime() - new Date().setHours(0, 0, 0, 0)) / 86400000);
+const daysUntil = calendarDaysUntil;
 
 const OverviewPage = ({ contracts, createContract }) => {
   const today = new Intl.DateTimeFormat("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" }).format(new Date()).toUpperCase();

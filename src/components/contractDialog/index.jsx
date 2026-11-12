@@ -1,16 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { FiFilePlus, FiUploadCloud, FiX } from "react-icons/fi";
+import { createBlankContract } from "../../dateUtils";
 import styles from "./styles.module.css";
-
-const blankContract = {
-  name: "", counterparty: "", type: "Software subscription", owner: "Olivia Chen",
-  value: "", startDate: "2026-10-15", endDate: "2027-10-14", renewalDate: "2027-08-15",
-  clause: "", documentName: "",
-};
 
 const ContractDialog = ({ mode, contract, playbook, formType = "contract", onClose, onSave }) => {
   const source = formType === "playbook" ? playbook : contract;
-  const [values, setValues] = useState({ ...blankContract, ...(source || {}) });
+  const [values, setValues] = useState(() => ({ ...createBlankContract(), ...(source || {}) }));
   const [error, setError] = useState("");
   const [fileName, setFileName] = useState(source?.documentName || "");
   const dialogRef = useRef(null);
@@ -108,7 +103,7 @@ const ContractDialog = ({ mode, contract, playbook, formType = "contract", onClo
               <div className={styles.field}><label htmlFor="contract-counterparty">Counterparty</label><input id="contract-counterparty" autoComplete="organization" maxLength={80} onChange={(event) => set("counterparty", event.target.value)} placeholder="Company or person" value={values.counterparty || ""} /></div>
               <div className={styles.field}><label htmlFor="contract-type">Agreement type</label><select id="contract-type" onChange={(event) => set("type", event.target.value)} value={values.type || "Software subscription"}><option>Software subscription</option><option>Professional services</option><option>Service agreement</option><option>Mutual NDA</option><option>Data processing</option><option>Lease</option><option>License</option><option>Other</option></select></div>
               <div className={styles.field}><label htmlFor="contract-owner">Internal owner</label><select id="contract-owner" onChange={(event) => set("owner", event.target.value)} value={values.owner || "Olivia Chen"}><option>Olivia Chen</option><option>Marcus Lee</option><option>Avery Brooks</option><option>Sam Rivera</option></select></div>
-              <div className={styles.field}><label htmlFor="contract-value">Annual value (USD)</label><input id="contract-value" min="0" onChange={(event) => set("value", event.target.value)} placeholder="0" step="100" type="number" value={values.value ?? ""} /></div>
+              <div className={styles.field}><label htmlFor="contract-value">Annual value (USD)</label><input id="contract-value" min="0" onChange={(event) => set("value", event.target.value)} placeholder="0" step="0.01" type="number" value={values.value ?? ""} /></div>
               <div className={styles.field}><label htmlFor="contract-start">Effective date</label><input id="contract-start" onChange={(event) => set("startDate", event.target.value)} type="date" value={values.startDate || ""} /></div>
               <div className={styles.field}><label htmlFor="contract-end">End date</label><input id="contract-end" onChange={(event) => set("endDate", event.target.value)} type="date" value={values.endDate || ""} /></div>
               <div className={styles.field}><label htmlFor="contract-renewal">Renewal notice date</label><input id="contract-renewal" onChange={(event) => set("renewalDate", event.target.value)} type="date" value={values.renewalDate || ""} /></div>
